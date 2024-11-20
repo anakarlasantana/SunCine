@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import AuthContainer from "../../container/AuthContainer";
 import { useForm } from "react-hook-form";
 import { useWebViewContext } from "../../context/WebViewsContext";
-import logo from "../assets/logo.svg";
+import logo from "../../assets/logo.svg";
 import { BannerContainer } from "../../container/BannerContainer";
 import { BaseTextField } from "../../components/BaseTextField";
 
