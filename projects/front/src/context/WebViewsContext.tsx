@@ -1,5 +1,5 @@
 import useMediaQuery from "@mui/material/useMediaQuery";
-import React, { PropsWithChildren, useMemo } from "react";
+import React, { type PropsWithChildren } from "react";
 
 type ContextProps = {
   currentBreakPoint(): "xs" | "sm" | "md";
@@ -8,23 +8,20 @@ type ContextProps = {
 const Context = React.createContext({} as ContextProps);
 
 export const WebViewProvider = ({ children }: PropsWithChildren) => {
-  const isPhone = useMediaQuery("(min-width: 390px) and (max-width: 844px)");
-  const isTablet = useMediaQuery("(min-width: 744px) and (max-width: 1133px)");
-  const isDesktop = useMediaQuery("(min-width: 1512px)");
+  const is_phone = useMediaQuery("(min-width: 320px) and (max-width: 425px)");
+  const is_tablet = useMediaQuery("(min-width: 744px) and (max-width: 1133px)");
+  const is_desktop = useMediaQuery("(min-width: 1200px)");
 
   function currentBreakPoint() {
-    if (isDesktop) return "md";
-    if (isTablet) return "sm";
-    if (isPhone) return "xs";
+    if (is_desktop) return "md";
+    if (is_tablet) return "sm";
+    if (is_phone) return "xs";
     return "md";
   }
 
-  const contextValue = useMemo(
-    () => ({
-      currentBreakPoint,
-    }),
-    [isDesktop, isTablet, isPhone]
-  );
+  const contextValue = {
+    currentBreakPoint,
+  };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
