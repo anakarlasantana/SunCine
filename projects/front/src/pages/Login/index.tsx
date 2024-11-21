@@ -1,14 +1,19 @@
-import { Stack } from "@mui/material";
-import AuthContainer from "../../container/AuthContainer";
+import { Button, Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useWebViewContext } from "../../context/WebViewsContext";
-import logo from "../../assets/logo.svg";
 import { BannerContainer } from "../../container/BannerContainer";
 import { BaseTextField } from "../../components/BaseTextField";
+import { BaseButton } from "../../components/BaseButton";
+import { AuthContainer } from "../../container/AuthContainer";
+import { theme } from "../../theme/theme";
+import { useNavigate } from "react-router-dom";
+import { sitemap } from "../../router/siteMap";
+import { Logo } from "../../components/Logo";
 
 export const Login = () => {
-  const mainform = useForm();
+  const main_form = useForm();
   const { currentBreakPoint } = useWebViewContext();
+  const navigate = useNavigate();
 
   const width_size = {
     xs: "200px",
@@ -19,12 +24,12 @@ export const Login = () => {
   const height_size = {
     xs: "496px",
     sm: "397px",
-    md: "496px",
+    md: "397px",
   };
 
   const left_size = {
-    xs: "16px",
-    sm: "164px",
+    xs: "50px",
+    sm: "140px",
     md: "233px",
   };
 
@@ -34,26 +39,19 @@ export const Login = () => {
     md: "194px",
   };
 
-  const logo_top_size = {
-    xs: "80.39px",
-    sm: "80.39px",
-    md: "80.4px",
+
+  function onResetPassword() {
+    navigate(sitemap.auth.reset_password);
+  }
+
+  function onSubmit() {
+    navigate(sitemap.home);
   }
 
   return (
     <BannerContainer>
       <Stack>
-        <Stack
-          sx={{
-            position: "absolute",
-            top: logo_top_size[currentBreakPoint()],
-            left: left_size[currentBreakPoint()],
-            zIndex: 1,
-            objectFit: "cover",
-          }}
-        >
-          <img src={logo} alt="logo" width={"186px"} height={"49.7px"} />
-        </Stack>
+        <Logo left={left_size[currentBreakPoint()]} />
         <AuthContainer
           title={"Olá cinéfilo,"}
           subtitle="que bom te ver por aqui!"
@@ -65,16 +63,31 @@ export const Login = () => {
           <Stack paddingTop={2} spacing={2}>
             <BaseTextField
               name={"username"}
-              control={mainform.control}
+              control={main_form.control}
               placeholder="Insira seu e-mail"
               inputLabel="E-mail"
             />
             <BaseTextField
               name={"password"}
-              control={mainform.control}
+              control={main_form.control}
               placeholder="Insira sua senha"
               inputLabel="Senha"
             />
+            <Stack alignItems={"end"}>
+              <Button
+                variant="text"
+                sx={{
+                  textTransform: "none",
+                  color: theme.palette.custom_colors.medium_orange,
+                  justifySelf: "end",
+                  textDecoration: "underline",
+                }}
+                onClick={onResetPassword}
+              >
+                Não consigo acessar minha conta
+              </Button>
+            </Stack>
+            <BaseButton title="Entrar" onChange={onSubmit} />
           </Stack>
         </AuthContainer>
       </Stack>

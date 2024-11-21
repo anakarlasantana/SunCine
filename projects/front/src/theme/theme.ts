@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface Palette {
-    neutralGray: {
+    neutral_gray: {
       50: string;
       100: string;
       200: string;
@@ -14,13 +14,13 @@ declare module "@mui/material/styles" {
       800: string;
       900: string;
     };
-    customColors: {
+    custom_colors: {
       black: string;
-      brightOrange: string;
-      mediumOrange: string;
-      lightOrange: string;
-      liveYellow: string;
-      liveGreen: string;
+      bright_orange: string;
+      medium_orange: string;
+      light_orange: string;
+      live_yellow: string;
+      live_green: string;
     };
     bright: {
       100: string;
@@ -34,7 +34,7 @@ declare module "@mui/material/styles" {
       900: string;
       1000: string;
     };
-    orangeDark: {
+    orange_dark: {
       100: string;
       200: string;
       300: string;
@@ -46,7 +46,7 @@ declare module "@mui/material/styles" {
       900: string;
       1000: string;
     };
-    orangeLight: {
+    orange_light: {
       100: string;
       200: string;
       300: string;
@@ -85,7 +85,7 @@ declare module "@mui/material/styles" {
   }
 
   interface PaletteOptions {
-    neutralGray?: {
+    neutral_gray?: {
       50: string;
       100: string;
       200: string;
@@ -97,13 +97,13 @@ declare module "@mui/material/styles" {
       800: string;
       900: string;
     };
-    customColors?: {
+    custom_colors?: {
       black: string;
-      brightOrange: string;
-      mediumOrange: string;
-      lightOrange: string;
-      liveYellow: string;
-      liveGreen: string;
+      bright_orange: string;
+      medium_orange: string;
+      light_orange: string;
+      live_yellow: string;
+      live_green: string;
     };
     bright: {
       100: string;
@@ -117,7 +117,7 @@ declare module "@mui/material/styles" {
       900: string;
       1000: string;
     };
-    orangeDark: {
+    orange_dark: {
       100: string;
       200: string;
       300: string;
@@ -129,7 +129,7 @@ declare module "@mui/material/styles" {
       900: string;
       1000: string;
     };
-    orangeLight: {
+    orange_light: {
       100: string;
       200: string;
       300: string;
@@ -168,7 +168,7 @@ declare module "@mui/material/styles" {
   }
 }
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: "#0A1916",
@@ -176,7 +176,7 @@ const theme = createTheme({
       dark: "#212121",
       contrastText: "#FCFCFC",
     },
-    neutralGray: {
+    neutral_gray: {
       50: "#F7F7F5",
       100: "#EDEDED",
       200: "#E0E0E0",
@@ -188,13 +188,13 @@ const theme = createTheme({
       800: "#595959",
       900: "#424242",
     },
-    customColors: {
+    custom_colors: {
       black: "#181818",
-      brightOrange: "#FF5959",
-      mediumOrange: "#FF5F00",
-      lightOrange: "#FF8800",
-      liveYellow: "#FFB000",
-      liveGreen: "#193B34",
+      bright_orange: "#FF5959",
+      medium_orange: "#FF5F00",
+      light_orange: "#FF8800",
+      live_yellow: "#FFB000",
+      live_green: "#193B34",
     },
     bright: {
       100: "#FEE7E5",
@@ -208,7 +208,7 @@ const theme = createTheme({
       900: "#E32000",
       1000: "#CC0000",
     },
-    orangeDark: {
+    orange_dark: {
       100: "#FCE9E6",
       200: "#FFCDB8",
       300: "#FFAD8B",
@@ -220,7 +220,7 @@ const theme = createTheme({
       900: "#D94900",
       1000: "#C13A00",
     },
-    orangeLight: {
+    orange_light: {
       100: "#FFF3E0",
       200: "#FFDFB1",
       300: "#FFCA7F",
@@ -259,4 +259,4 @@ const theme = createTheme({
   },
 });
 
-export default theme;
+

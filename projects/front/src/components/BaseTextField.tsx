@@ -6,7 +6,7 @@ import {
   type TextFieldProps,
 } from "@mui/material";
 import { Controller, type Control, type FieldValues, type Path } from "react-hook-form";
-import theme from "../theme/theme";
+import { theme } from "../theme/theme";
 
 export type CustomTextFieldProps<T extends FieldValues> = {
   control: Control<T>;
@@ -17,21 +17,21 @@ export type CustomTextFieldProps<T extends FieldValues> = {
 
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
-    color: theme.palette.neutralGray[100],
+    color: theme.palette.neutral_gray[100],
   },
   "& .MuiInput-underline:after": {
-    borderBottomColor: theme.palette.neutralGray[50],
+    borderBottomColor: theme.palette.neutral_gray[50],
   },
   "& .MuiOutlinedInput-root": {
-    backgroundColor: theme.palette.neutralGray[200],
+    backgroundColor: theme.palette.neutral_gray[200],
     "& fieldset": {
       borderColor: theme.palette.green[800],
     },
     "&:hover fieldset": {
-      borderColor: theme.palette.neutralGray[200],
+      borderColor: theme.palette.neutral_gray[200],
     },
     "&.Mui-focused fieldset": {
-      borderColor: theme.palette.neutralGray[200],
+      borderColor: theme.palette.neutral_gray[200],
     },
   },
 });
@@ -52,7 +52,7 @@ export function BaseTextField<T extends FieldValues>({
           {inputLabel && (
             <InputLabel
               sx={{
-                color: theme.palette.neutralGray[50],
+                color: theme.palette.neutral_gray[50],
                 fontSize: "16px",
               }}
             >

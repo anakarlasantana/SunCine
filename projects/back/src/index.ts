@@ -7,12 +7,13 @@ import { DB } from "./infra/db"
 import swagger from "@fastify/swagger"
 import swaggerUi from "@fastify/swagger-ui"
 import path from "node:path"
+import cors from "@fastify/cors"
 
 const PORT = 3000
 
 const fastify = Fastify({
   logger: true
-}).decorateRequest("user", undefined)
+}).register(cors, { origin: "*" }).decorateRequest("user", undefined)
 
 addRouters(fastify)
 

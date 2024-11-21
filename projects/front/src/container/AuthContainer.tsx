@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { PropsWithChildren } from "react";
-import theme from "../theme/theme";
+import type { PropsWithChildren } from "react";
+import { theme } from "../theme/theme";
 
 interface AuthContainerProps {
   description?: string;
@@ -12,7 +12,7 @@ interface AuthContainerProps {
   top?: string;
 }
 
-function AuthContainer({
+export function AuthContainer({
   children,
   title,
   subtitle,
@@ -51,7 +51,7 @@ function AuthContainer({
             {title}
           </Typography>
           {subtitle && (
-            <Typography fontSize={"18px"} color={theme.palette.neutralGray[50]}>
+            <Typography fontSize={"18px"} color={theme.palette.neutral_gray[50]}>
               {subtitle}
             </Typography>
           )}
@@ -62,4 +62,3 @@ function AuthContainer({
   );
 }
 
-export default AuthContainer;
