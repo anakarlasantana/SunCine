@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
+import { Header } from "./components/Header";
+import { BackgroundContainer } from "../../container/BackgroundContainer";
 
 export const Home = () => {
   return (
-    <div>
-      Hello
-    </div>
+    <BackgroundContainer>
+      <Header />
+    </BackgroundContainer>
   );
 };
-

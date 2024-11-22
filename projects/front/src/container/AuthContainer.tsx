@@ -3,13 +3,13 @@ import type { PropsWithChildren } from "react";
 import { theme } from "../theme/theme";
 
 interface AuthContainerProps {
-  description?: string;
   title: string;
   subtitle?: string;
   width?: string;
   height?: string;
   left?: string;
   top?: string;
+  align?: "left" | "center" | "right";
 }
 
 export function AuthContainer({
@@ -20,6 +20,7 @@ export function AuthContainer({
   height,
   left,
   top,
+  align
 }: PropsWithChildren<AuthContainerProps>) {
   return (
     <Stack
@@ -43,7 +44,7 @@ export function AuthContainer({
           backdropFilter: "blur(24px)",
         }}
       >
-        <Stack>
+        <Stack textAlign={align}>
           <Typography
             fontSize={"24px"}
             color={theme.palette.primary.contrastText}
