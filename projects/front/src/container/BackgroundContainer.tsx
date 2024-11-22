@@ -5,11 +5,13 @@ import type { PropsWithChildren } from "react";
 
 interface BackgroundContainerProps {
   children: React.ReactNode;
+  value: number;
   onChange: (value: number) => void;
 }
 
 export function BackgroundContainer({
   children,
+  value,
   onChange,
 }: PropsWithChildren<BackgroundContainerProps>) {
   const { currentBreakPoint } = useWebViewContext();
@@ -30,7 +32,7 @@ export function BackgroundContainer({
       />
       {children}
       {(currentBreakPoint() === "xs" || currentBreakPoint() === "sm") && (
-        <MyBottomNavigation onChange={onChange} />
+        <MyBottomNavigation value={value} onChange={onChange} />
       )}
     </Stack>
   );

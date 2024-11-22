@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { theme } from "../../theme/theme";
 import ticket_mobile from "../../assets/ticket_mobile.svg";
@@ -7,12 +6,11 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 interface BottomNavigationProps {
+  value: number;
   onChange: (value: number) => void;
 }
 
-export function MyBottomNavigation({ onChange }: BottomNavigationProps) {
-  const [value, setValue] = useState(0);
-
+export function MyBottomNavigation({ onChange, value }: BottomNavigationProps) {
   const navItems = [
     {
       label: "Filmes em alta",
@@ -50,9 +48,7 @@ export function MyBottomNavigation({ onChange }: BottomNavigationProps) {
     <BottomNavigation
       showLabels
       value={value}
-      onChange={(_, newValue) => {
-        setValue(newValue);
-      }}
+      onChange={(_, newValue) => onChange(newValue)}
       sx={{
         width: "100%",
         height: 70,
