@@ -1,22 +1,15 @@
 import { Favorite } from "@mui/icons-material";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
-import { useState } from "react";
+import { Box, Tab, Tabs } from "@mui/material";
 import { theme } from "../../../theme/theme";
 import PersonIcon from "@mui/icons-material/Person";
 import ticket from "../../../assets/ticket.svg";
 
 interface MenuProps {
-  onChange: (value: number) => void;
+  value: number;
+  onChange: (event: React.SyntheticEvent, newValue: number) => void;
 }
 
-export function Menu({ onChange }: MenuProps) {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-    onChange(newValue);
-  };
-
+export function Menu({ value, onChange }: MenuProps) {
   return (
     <Box
       sx={{
@@ -28,7 +21,7 @@ export function Menu({ onChange }: MenuProps) {
     >
       <Tabs
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         textColor="inherit"
         indicatorColor="primary"
         variant="scrollable"
@@ -53,7 +46,7 @@ export function Menu({ onChange }: MenuProps) {
         }}
       >
         <Tab
-          icon={<img src={ticket} width="20px" height="20px" />}
+          icon={<img src={ticket} alt="icon" width="20px" height="20px" />}
           iconPosition="start"
           label="Filmes em alta"
           value={0}

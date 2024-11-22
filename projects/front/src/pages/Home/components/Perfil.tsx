@@ -6,8 +6,7 @@ interface PerfilProps {
   onLogout: () => void;
 }
 
-export function Perfil({name, email, onLogout} : PerfilProps) {
-
+export function Perfil({ name, email, onLogout }: PerfilProps) {
   return (
     <Stack
       direction="column"
@@ -33,7 +32,7 @@ export function Perfil({name, email, onLogout} : PerfilProps) {
           textDecoration: "underline",
           color: "primary.main",
           fontWeight: "bold",
-          textTransform: "none"
+          textTransform: "none",
         }}
         onClick={onLogout}
       >

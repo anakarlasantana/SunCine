@@ -13,14 +13,20 @@ export const Home = () => {
   const { userInfo, logout } = useAuthContext();
   const [selectedTab, setSelectedTab] = useState<number>(0);
 
-  const handleTabChange = (newValue: number) => {
+  const handleTabChange = (_, newValue: number) => {
     setSelectedTab(newValue);
   };
 
+  const handleViewProfile = () => {
+    setSelectedTab(2);
+  };
+
   return (
-    <BackgroundContainer onChange={handleTabChange}>
-      <Header />
-      {currentBreakPoint() === "md" && <Menu onChange={handleTabChange} />}
+    <BackgroundContainer onChange={() => handleTabChange}>
+      <Header onViewProfile={handleViewProfile} />
+      {currentBreakPoint() === "md" && (
+        <Menu value={selectedTab} onChange={handleTabChange} />
+      )}
       {selectedTab === 0 && <ListMovies />}
       {selectedTab === 1 && <LikedMovies />}
       {selectedTab === 2 && (

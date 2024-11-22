@@ -2,17 +2,12 @@ import { Avatar, Button, IconButton, Stack, Typography } from "@mui/material";
 import logo from "../../../assets/logo.svg";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { theme } from "../../../theme/theme";
-import { useNavigate } from "react-router-dom";
-import { sitemap } from "../../../router/siteMap";
 import { useWebViewContext } from "../../../context/WebViewsContext";
+import { useAuthContext } from "../../../context/AuthContext";
 
-export function Header() {
-  const navigate = useNavigate();
+export function Header({ onViewProfile }: { onViewProfile: () => void }) {
   const { currentBreakPoint } = useWebViewContext();
-
-  function Logout() {
-    navigate(sitemap.auth.login);
-  }
+  const { logout, userInfo } = useAuthContext();
 
   return (
     <Stack
@@ -47,7 +42,7 @@ export function Header() {
                 fontSize="16px"
                 sx={{ mb: -0.5, color: theme.palette.neutral_gray[50] }}
               >
-                Olá
+                Olá {userInfo?.payload?.name}
               </Typography>
               <Button
                 variant="text"
@@ -56,11 +51,12 @@ export function Header() {
                   textDecoration: "underline",
                   color: theme.palette.neutral_gray[500],
                 }}
+                onClick={onViewProfile}
               >
                 Ver perfil
               </Button>
             </Stack>
-            <IconButton onClick={Logout}>
+            <IconButton onClick={logout}>
               <LogoutIcon style={{ color: theme.palette.neutral_gray[50] }} />
             </IconButton>
           </>
