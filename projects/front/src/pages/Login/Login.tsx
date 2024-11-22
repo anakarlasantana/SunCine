@@ -80,6 +80,7 @@ export const Login = () => {
             control={main_form.control}
             placeholder="Insira sua senha"
             inputLabel="Senha"
+            type="password"
           />
           <Stack alignItems={"end"}>
             <Button
