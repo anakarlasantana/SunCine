@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { theme } from "../../../../theme/theme";
-import ticket_mobile from "../../../assets/ticket_mobile.svg";
-import ticket_mobile_white from "../../../assets/ticket_mobile_white.svg";
+import ticket_mobile from "../../../../assets/ticket_mobile.svg";
+import ticket_mobile_white from "../../../../assets/ticket_mobile_white.svg";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 
