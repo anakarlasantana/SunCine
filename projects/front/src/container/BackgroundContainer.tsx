@@ -1,16 +1,21 @@
-import { type PropsWithChildren, useEffect } from "react";
 import { Stack } from "@mui/material";
+import { useWebViewContext } from "../context/WebViewsContext";
+import { MyBottomNavigation } from "../pages/Home/components/Mobile/BottomNavigation";
+import type { PropsWithChildren } from "react";
 
 interface BackgroundContainerProps {
   children: React.ReactNode;
+  onChange: (value: number) => void;
 }
 
 export function BackgroundContainer({
   children,
+  onChange,
 }: PropsWithChildren<BackgroundContainerProps>) {
+  const { currentBreakPoint } = useWebViewContext();
 
   return (
-    <Stack>
+    <Stack sx={{ position: "relative", minHeight: "100vh", width: "100%" }}>
       <Stack
         sx={{
           position: "absolute",
@@ -24,7 +29,9 @@ export function BackgroundContainer({
         }}
       />
       {children}
+      {(currentBreakPoint() === "xs" || currentBreakPoint() === "sm") && (
+        <MyBottomNavigation onChange={onChange} />
+      )}
     </Stack>
   );
 }
-

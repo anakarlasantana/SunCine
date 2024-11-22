@@ -36,7 +36,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const userInfo = await authService.me();
     storageUserInfo.set(JSON.stringify(userInfo));
     setUserInfo(userInfo);
-    return userInfo;s
+    return userInfo;
   };
 
   const logout = () => {
