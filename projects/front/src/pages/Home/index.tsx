@@ -4,10 +4,13 @@ import { Menu } from "./components/Tab";
 import { useState } from "react";
 import { ListMovies } from "./components/ListMovies";
 import { useWebViewContext } from "../../context/WebViewsContext";
+import { LikedMovies } from "./components/LikedMovies";
+import { Perfil } from "./components/Perfil";
+import { useAuthContext } from "../../context/AuthContext";
 
 export const Home = () => {
   const { currentBreakPoint } = useWebViewContext();
-
+  const { userInfo, logout } = useAuthContext();
   const [selectedTab, setSelectedTab] = useState<number>(0);
 
   const handleTabChange = (newValue: number) => {
@@ -15,12 +18,18 @@ export const Home = () => {
   };
 
   return (
-    <>
-      <BackgroundContainer onChange={handleTabChange}>
-        <Header />
-        {currentBreakPoint() === "md" && <Menu onChange={handleTabChange} />}
-        {selectedTab === 0 && <ListMovies />}
-      </BackgroundContainer>
-    </>
+    <BackgroundContainer onChange={handleTabChange}>
+      <Header />
+      {currentBreakPoint() === "md" && <Menu onChange={handleTabChange} />}
+      {selectedTab === 0 && <ListMovies />}
+      {selectedTab === 1 && <LikedMovies />}
+      {selectedTab === 2 && (
+        <Perfil
+          name={userInfo?.payload?.name}
+          email={userInfo?.payload?.login}
+          onLogout={logout}
+        />
+      )}
+    </BackgroundContainer>
   );
 };

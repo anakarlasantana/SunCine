@@ -1,5 +1,5 @@
 export interface STORED {
     get: () => unknown;
-    set: (token: string) => void
+    set: (val: STORED) => void
     destroy: () => void;
   }

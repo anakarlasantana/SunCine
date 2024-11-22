@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services/auth";
 import type { ME } from "../interfaces/me";
-import { useStorageUserInfo } from "../hook/userInfo";
 import { useAccessType, useStorageAccessToken } from "../hook/acessToken";
 import {
   createContext,
@@ -10,12 +9,19 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useStorageUserInfo } from "../hook/userInfo";
+
+interface LoginPayload {
+  email: string;
+  password: string;
+}
 
 interface IContext {
-  login: (payload) => Promise<ME>;
+  login: (payload: LoginPayload) => Promise<ME>;
   logout: () => void;
   userInfo: ME | null;
 }
+
 const Context = createContext({} as IContext);
 
 export function AuthProvider({ children }: PropsWithChildren) {
@@ -25,18 +31,28 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [userInfo, setUserInfo] = useState<ME | null>(null);
   const navigate = useNavigate();
 
-  const login = async (payload) => {
-    await authService.login(payload).then((res) => {
+  const login = async (payload: LoginPayload) => {
+    try {
+      const res = await authService.login(payload);
       storageAccessToken.set(res.payload.token);
-    });
-    return me();
+      return me();
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+      throw new Error("Falha ao fazer login");
+    }
   };
 
   const me = async () => {
-    const userInfo = await authService.me();
-    storageUserInfo.set(JSON.stringify(userInfo));
-    setUserInfo(userInfo);
-    return userInfo;
+    try {
+      const userInfo = await authService.me();
+      storageUserInfo.set(userInfo);
+      setUserInfo(userInfo);
+      return userInfo;
+    } catch (error) {
+      console.error("Erro ao obter informações do usuário:", error);
+      alert("Sessão expirada. Por favor, faça login novamente.");
+      logout();
+    }
   };
 
   const logout = () => {
@@ -67,7 +83,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export function useAuthContext() {
   return useContext(Context);
 }

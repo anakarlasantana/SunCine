@@ -8,22 +8,51 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { moviesService } from "../../../services/movies";
+import { movie_service } from "../../../services/movies";
 import type { Movie } from "../../../interfaces/movies";
 import { theme } from "../../../theme/theme";
+import { LikeButton } from "./LinkeButton";
 
 export function ListMovies() {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const fetchMovies = async () => {
     try {
-      const response = await moviesService.all();
-      setMovies(response);
+      const response = await movie_service.all();
+      const likedMovies = JSON.parse(localStorage.getItem('likedMovies') || '{}');
+      const moviesWithLikes = response.map((movie: Movie) => ({
+        ...movie,
+        liked: likedMovies[movie.tmdb_id] || false,
+      }));
+      setMovies(moviesWithLikes);
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
     }
   };
 
+  const handleLikeToggle = async (liked: boolean, id_movie: number) => {
+    try {
+      if (liked) {
+        await movie_service.like(id_movie);
+      } else {
+        await movie_service.unliked(id_movie);
+      }
+
+      const updatedMovies = movies.map(movie =>
+        movie.tmdb_id === id_movie ? { ...movie, liked } : movie
+      );
+      setMovies(updatedMovies);
+
+      const likedMovies = JSON.parse(localStorage.getItem('likedMovies') || '{}');
+      likedMovies[id_movie] = liked;
+      localStorage.setItem('likedMovies', JSON.stringify(likedMovies));
+
+    } catch (error) {
+      console.error("Erro ao atualizar o like:", error);
+    }
+  };
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -52,6 +81,12 @@ export function ListMovies() {
                     height: "330px",
                   }}
                 />
+                <LikeButton
+                  size="40px"
+                  id_movie={movies[0].tmdb_id}
+                  on_like={handleLikeToggle}
+                  initial_like={movies[0].likes}
+                />
                 <CardContent
                   sx={{
                     position: "absolute",
@@ -72,7 +107,6 @@ export function ListMovies() {
             </Card>
           </Grid>
         )}
-
         {movies.slice(1, 3).map((movie) => (
           <Grid item xs={12} sm={2} md={2} key={movie.id}>
             <Card>
@@ -86,6 +120,12 @@ export function ListMovies() {
                     objectFit: "cover",
                     height: "330px",
                   }}
+                />
+                <LikeButton
+                  id_movie={movie.tmdb_id}
+                  size="40px"
+                  on_like={handleLikeToggle}
+                  initial_like={movie.likes}
                 />
                 <CardContent
                   sx={{
@@ -132,6 +172,12 @@ export function ListMovies() {
                     objectFit: "cover",
                     height: "296px",
                   }}
+                />
+                 <LikeButton
+                  id_movie={movie.tmdb_id}
+                  size="40px"
+                  initial_like={movie.likes}
+                  on_like={handleLikeToggle}
                 />
                 <CardContent
                   sx={{

@@ -8,7 +8,7 @@ export function useStorageAccessToken(): STORED {
     return item ? JSON.parse(item) : null;
   };
   const set = (token: string) => {
-    const tokenInfo = localStorage.setItem(token, JSON.stringify(token));
+    const tokenInfo = localStorage.setItem(valueKey, JSON.stringify(token));
     return tokenInfo;
   };
 

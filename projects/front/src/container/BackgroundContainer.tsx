@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import { useWebViewContext } from "../context/WebViewsContext";
-import { MyBottomNavigation } from "../pages/Home/components/Mobile/BottomNavigation";
+import { MyBottomNavigation } from "../components/Mobile/BottomNavigation";
 import type { PropsWithChildren } from "react";
 
 interface BackgroundContainerProps {
