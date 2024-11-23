@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { movie_service } from "../../../services/movies";
 import type { Movie } from "../../../interfaces/movies";
 import { theme } from "../../../theme/theme";
-import { LikeButton } from "./LinkeButton";
+import { LikeButton } from "./LikeButton";
 
 export function ListMovies() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -121,7 +121,17 @@ export function ListMovies() {
                     <Typography variant="h5" component="div">
                       {movies[0].original_title}
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography
+                      sx={{
+                        color: theme.palette.neutral_gray[50],
+                        fontSize: "14px",
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        WebkitLineClamp: 2,
+                        textOverflow: "ellipsis",
+                      }}
+                    >
                       {movies[0].overview}
                     </Typography>
                   </CardContent>
